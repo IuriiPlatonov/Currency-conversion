@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #stats_form {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #to_exchange_form {
+            position: absolute;
+            left: 80%;
+            top: 20%;
+            transform: translate(-2%, -2%);
+        }
+
+        .currency_item {
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        .list {
+            width: 50%;
+            border-collapse: collapse;
+            margin: auto;
+            text-align: left;
+        }
+
+    </style>
+</head>
+
+<script>
+
+    function showTable1() {
+        document.getElementById('table_1').style.display = "table";
+        document.getElementById('table_2').style.display = "none";
+    }
+
+    function showTable2() {
+        document.getElementById('table_1').style.display = "none";
+        document.getElementById('table_2').style.display = "table";
+    }
+</script>
+
+<body>
+<div id="to_exchange_form">
+    <label class="currency_item">Current user: </label>
+    <label class="currency_item" th:text="${email}"></label>
+    <form method="get" th:action="@{/exchange}">
+        <input class="currency_item" value="To exchange" type="submit">
+    </form>
+    <form method="get" th:action="@{/logout}">
+        <input class="currency_item" type="submit" value="Logout">
+    </form>
+</div>
+
+<label id="qwe"></label>
+<div id="stats_form">
+    <form method="get" th:action="@{/stats}">
+
+
+        <label class="currency_item">Users whose total exchange request is higher than
+            <input class="currency_item" type="text" placeholder="amount" name="more" th:value="${more}">
+        </label>
+
+        <br>
+
+        <label class="currency_item">Users whose total exchange request is less than
+            <input class="currency_item" type="text" placeholder="amount" name="less" th:value="${less}">
+        </label>
+
+        <br>
+
+        <label class="currency_item">Users who requested conversion for one request more
+            <input class="currency_item" type="text" placeholder="amount" name="onceMore" th:value="${onceMore}">
+        </label>
+        <input class="currency_item" value="show" type="submit" onclick="showTable1()">
+
+        <br>
+
+        <label class="currency_item">Show currency pair rating</label>
+        <input class="currency_item" value="show" type="button" onclick="showTable2()">
+
+        <table style="display: table" class="list" id="table_1">
+            <tr>
+                <th>ID</th>
+                <th>User_name</th>
+                <th>Value</th>
+            </tr>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.id()}"></td>
+                <td th:text="${user.username()}"></td>
+                <td th:text="${user.sum()}"></td>
+            </tr>
+        </table>
+
+        <table style="display: none" class="list" id="table_2">
+            <tr>
+                <th>Currency_pair</th>
+                <th>Count</th>
+            </tr>
+            <tr th:each="pair : ${currencyPair}">
+                <td th:text="${pair.pair()}"></td>
+                <td th:text="${pair.count()}"></td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+</body>
+</html>

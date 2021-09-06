@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency</title>
+    <style>
+        #currency_form {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #logout_form {
+            position: absolute;
+            left: 80%;
+            top: 20%;
+            transform: translate(-2%, -2%);
+        }
+
+        .currency_item {
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="logout_form">
+    <label class="currency_item">Current user: </label>
+    <label class="currency_item" th:text="${email}"></label>
+    <form method="get" th:action="@{/stats}">
+        <input class="currency_item" value="Statistics" th:type="${statistics}">
+    </form>
+    <form method="get" th:action="@{/logout}">
+        <input class="currency_item" type="submit" value="Logout">
+    </form>
+</div>
+
+<div id="currency_form">
+    <form method="get" th:action="@{/exchange}">
+
+        <label class="currency_item">Currency pair: </label>
+        <br>
+        <input class="currency_item" type="text" placeholder="enter amount" name="amount">
+        <input class="currency_item" list="first" name="fromCurrency" th:value="${from}">
+        <datalist id="first">
+            <option th:each="item : ${fromCurrency}"
+                    th:value="${item}"
+                    th:text="${item}"></option>
+        </datalist>
+
+        <input class="currency_item" list="second" name="toCurrency" th:value="${to}">
+        <datalist id="second">
+            <option th:each="item : ${toCurrency}"
+                    th:value="${item}"
+                    th:text="${item}"></option>
+        </datalist>
+        <input class="currency_item" type="submit" value="exchange">
+        <br>
+        <label class="currency_item">Result: </label>
+        <label class="currency_item" th:text="${result}"></label>
+        <label class="currency_item" th:text="${to}"></label>
+    </form>
+</div>
+</body>
+</html>

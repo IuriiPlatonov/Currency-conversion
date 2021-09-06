@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    #root_container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .login_item {
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+<div id="root_container">
+    <form method="post" th:action="@{/auth/login}" th:object="${authRequest}">
+        <br>
+        <input class="login_item" type="text" placeholder="enter email" th:field="*{email}">
+        <br>
+        <input class="login_item" type="password" placeholder="password" th:field="*{password}">
+        <br>
+        <input class="login_item" type="submit" value="login">
+    </form>
+
+    <form method="get" th:action="@{/auth/register_page/}">
+        <text>if you are not registered</text>
+        <br>
+        <input class="login_item" type="submit" value="register">
+    </form>
+</div>
+</body>
+</html>

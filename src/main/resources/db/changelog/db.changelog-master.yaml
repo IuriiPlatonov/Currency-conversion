@@ -1,0 +1,7 @@
+databaseChangeLog: # параметр в котором находятся миграции
+  - include: # список активных миграций
+       file: db/changelog/changeset/create-users-table.yaml # путь к файлу миграции
+  - include:
+       file: db/changelog/changeset/create-conversion_currency-table.yaml # путь к файлу миграции
+  - include:
+       file: db/changelog/changeset/insert-users.yaml # путь к файлу миграции

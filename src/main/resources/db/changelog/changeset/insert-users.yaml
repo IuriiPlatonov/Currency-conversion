@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-users
+      author: Yury Platonov
+      comment: "insert 2 new users"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: "1"
+              - column:
+                  name: email
+                  value: "user@mail.com"
+              - column:
+                  name: moderator
+                  valueBoolean: false
+              - column:
+                  name: name
+                  value: "Uron"
+              - column:
+                  name: password
+                  value: "$2y$12$zwzF/aTEXwyWsybVNTu.D..X/P.dSu9FepHH7iqTDWnKCAD0rqcvy"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: "2"
+              - column:
+                  name: email
+                  value: "moderator@mail.com"
+              - column:
+                  name: moderator
+                  valueBoolean: true
+              - column:
+                  name: name
+                  value: "Moderator"
+              - column:
+                  name: password
+                  value: "$2y$12$zwzF/aTEXwyWsybVNTu.D..X/P.dSu9FepHH7iqTDWnKCAD0rqcvy"

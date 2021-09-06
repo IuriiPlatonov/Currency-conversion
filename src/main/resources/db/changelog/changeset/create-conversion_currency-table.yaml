@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-conversion_currency #т екстовый идентификатор (Обязателен)
+      author: Yury Platonov # автор (Обязателен)
+      changes:
+        - createTable:
+            tableName: conversion_currency
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency_pair
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
